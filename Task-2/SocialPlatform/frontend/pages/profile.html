@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Facebook</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fb-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-page="profile">
+    <header class="site-header fb-header">
+        <div class="fb-header-left">
+            <a class="brand fb-logo" href="../index.html"><span>f</span></a>
+            <div class="search-pill fb-search">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Facebook" class="search-input">
+            </div>
+        </div>
+        
+        <div class="fb-header-center">
+            <a href="feed.html" class="nav-icon"><i class="fa-solid fa-home"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-user-friends"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-tv"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-store"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-users"></i></a>
+        </div>
+
+        <div class="fb-header-right">
+            <a href="profile.html" class="nav-btn"><i class="fa-solid fa-th"></i></a>
+            <button class="nav-btn" id="open-notifications-button"><i class="fa-solid fa-bell"></i></button>
+            <a href="profile.html" class="nav-profile">
+                <div id="nav-profile-avatar" class="avatar tiny-avatar">N</div>
+            </a>
+            <button class="nav-btn logout-button"><i class="fa-solid fa-sign-out-alt"></i></button>
+        </div>
+    </header>
+
+    <main class="fb-profile-container">
+        <div class="profile-header-wrapper">
+            <div class="profile-cover-container">
+                <img id="profile-cover-img" src="https://via.placeholder.com/940x350?text=Cover+Photo" alt="Cover Photo" class="profile-cover">
+            </div>
+            <div class="profile-head-info">
+                <div class="profile-avatar-wrapper">
+                    <img id="profile-avatar-img" src="" alt="" class="profile-avatar-large hidden" />
+                    <div id="profile-avatar" class="avatar huge-avatar">N</div>
+                </div>
+                <div class="profile-name-section">
+                    <h1 id="profile-name">User Name</h1>
+                    <span id="profile-friends-count">0 friends</span>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn primary"><i class="fa-solid fa-plus"></i> Add to Story</button>
+                    <button class="btn secondary" id="edit-profile-btn"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="profile-nav">
+                <a href="#" class="active">Posts</a>
+                <a href="#">About</a>
+                <a href="#">Friends</a>
+                <a href="#">Photos</a>
+                <a href="#">Videos</a>
+                <a href="#">Check-ins</a>
+                <a href="#">More <i class="fa-solid fa-caret-down"></i></a>
+            </div>
+        </div>
+
+        <div class="profile-content-grid">
+            <div class="profile-left-col">
+                <div class="card intro-card">
+                    <h3>Intro</h3>
+                    <p id="profile-bio" class="bio-text">Welcome to my profile!</p>
+                    <div id="profile-details-list" class="profile-details">
+                        <!-- Location, Website etc -->
+                    </div>
+                    <button class="btn secondary btn-block">Edit details</button>
+                </div>
+                
+                <div class="card friends-card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Friends</h3>
+                            <span class="muted-text">0 friends</span>
+                        </div>
+                        <a href="#">See all friends</a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-right-col">
+                <section id="create-post" class="card composer-card fb-composer">
+                    <div class="composer-top">
+                        <div id="composer-avatar" class="avatar small-avatar">N</div>
+                        <button class="composer-open-btn" id="open-composer-modal">What's on your mind?</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="composer-bottom">
+                        <button class="composer-action"><i class="fa-solid fa-video" style="color: #f3425f;"></i> Live video</button>
+                        <button class="composer-action"><i class="fa-regular fa-image" style="color: #45bd62;"></i> Photo/video</button>
+                        <button class="composer-action"><i class="fa-solid fa-flag" style="color: #3bb273;"></i> Life event</button>
+                    </div>
+                    <!-- Hidden forms for actual submission instead of modal for simplicity right now -->
+                    <form id="post-form" class="composer-form hidden-form" style="display: none;">
+                        <textarea id="post-content" placeholder="Write something..." rows="3"></textarea>
+                        <input id="post-image" type="url" placeholder="Photo URL">
+                        <input id="post-video" type="url" placeholder="Video URL">
+                        <input id="post-link" type="url" placeholder="Link URL">
+                        <button type="submit" class="btn primary">Post</button>
+                        <button type="button" class="btn secondary" id="close-composer-modal">Cancel</button>
+                    </form>
+                </section>
+                
+                <div id="profile-posts" class="feed-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal-overlay hidden">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="divider"></div>
+            <div class="modal-body">
+                <div id="edit-alert"></div>
+                <form id="edit-profile-form">
+                    <div class="field">
+                        <label>Full Name</label>
+                        <input type="text" id="edit-fullname" required>
+                    </div>
+                    <div class="field">
+                        <label>Bio</label>
+                        <textarea id="edit-bio" rows="2"></textarea>
+                    </div>
+                    <div class="field">
+                        <label>Location</label>
+                        <input type="text" id="edit-location">
+                    </div>
+                    <div class="field">
+                        <label>Website</label>
+                        <input type="url" id="edit-website">
+                    </div>
+                    <div class="field">
+                        <label>Profile Picture URL</label>
+                        <input type="url" id="edit-profile-pic">
+                    </div>
+                    <div class="field">
+                        <label>Cover Photo URL</label>
+                        <input type="url" id="edit-cover-pic">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn secondary" id="cancel-edit-btn">Cancel</button>
+                        <button type="submit" class="btn primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        document.getElementById('edit-profile-btn').addEventListener('click', () => {
+            document.getElementById('edit-profile-modal').classList.remove('hidden');
+        });
+        document.getElementById('close-modal-btn').addEventListener('click', () => {
+            document.getElementById('edit-profile-modal').classList.add('hidden');
+        });
+        document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+            document.getElementById('edit-profile-modal').classList.add('hidden');
+        });
+        document.getElementById('open-composer-modal').addEventListener('click', () => {
+            document.getElementById('post-form').style.display = 'grid';
+            document.querySelector('.composer-bottom').style.display = 'none';
+            document.querySelector('.composer-open-btn').style.display = 'none';
+        });
+        document.getElementById('close-composer-modal').addEventListener('click', () => {
+            document.getElementById('post-form').style.display = 'none';
+            document.querySelector('.composer-bottom').style.display = 'flex';
+            document.querySelector('.composer-open-btn').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

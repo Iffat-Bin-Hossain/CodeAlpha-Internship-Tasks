@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nexus</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="login">
+    <header class="site-header">
+        <div class="container navbar">
+            <a class="brand" href="../index.html"><span>N</span>Nexus</a>
+            <div class="nav-actions">
+                <a class="secondary" href="register.html">Create account</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container page-shell">
+        <section class="auth-panel">
+            <h2>Welcome back</h2>
+            <p>Sign in to access your Nexus community dashboard.</p>
+            <div id="login-alert"></div>
+            <form id="login-form">
+                <div class="field">
+                    <label for="login-email">Email</label>
+                    <input id="login-email" type="email" placeholder="hello@nexus.app" required>
+                </div>
+                <div class="field">
+                    <label for="login-password">Password</label>
+                    <input id="login-password" type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn primary btn-block">Sign In</button>
+            </form>
+            <p style="margin-top: 1.25rem; color: var(--muted);">Don't have an account? <a href="register.html">Create one</a>.</p>
+        </section>
+    </main>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>

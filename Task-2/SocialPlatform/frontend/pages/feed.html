@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fb-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-page="feed">
+    <header class="site-header fb-header">
+        <div class="fb-header-left">
+            <a class="brand fb-logo" href="../index.html"><span>f</span></a>
+            <div class="search-pill fb-search">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search Facebook" class="search-input">
+            </div>
+        </div>
+        
+        <div class="fb-header-center">
+            <a href="feed.html" class="nav-icon active"><i class="fa-solid fa-home"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-user-friends"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-tv"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-store"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-users"></i></a>
+        </div>
+
+        <div class="fb-header-right">
+            <a href="profile.html" class="nav-btn"><i class="fa-solid fa-th"></i></a>
+            <button class="nav-btn" id="open-notifications-button"><i class="fa-solid fa-bell"></i></button>
+            <a href="profile.html" class="nav-profile">
+                <div id="profile-avatar" class="avatar tiny-avatar">N</div>
+            </a>
+            <button class="nav-btn logout-button"><i class="fa-solid fa-sign-out-alt"></i></button>
+        </div>
+    </header>
+
+    <main class="fb-container feed-layout">
+        <aside class="sidebar-column fb-sidebar-left">
+            <div class="side-nav-items">
+                <a href="profile.html" class="side-nav-item">
+                    <div class="avatar tiny-avatar" id="side-avatar">N</div>
+                    <strong id="profile-name">User Name</strong>
+                </a>
+                <a href="#" class="side-nav-item"><i class="fa-solid fa-user-friends" style="color: #1877f2;"></i> <strong>Find friends</strong></a>
+                <a href="#" class="side-nav-item"><i class="fa-solid fa-users" style="color: #1877f2;"></i> <strong>Groups</strong></a>
+                <a href="#" class="side-nav-item"><i class="fa-solid fa-store" style="color: #1877f2;"></i> <strong>Marketplace</strong></a>
+                <a href="#" class="side-nav-item"><i class="fa-solid fa-tv" style="color: #1877f2;"></i> <strong>Watch</strong></a>
+                <a href="#" class="side-nav-item"><i class="fa-solid fa-clock" style="color: #1877f2;"></i> <strong>Memories</strong></a>
+                <div class="divider"></div>
+                <h4>Your shortcuts</h4>
+                <div id="shortcuts-list" class="contacts-list">
+                    <p style="color: var(--fb-muted); font-size: 0.9em; padding: 0 8px;">No shortcuts yet.</p>
+                </div>
+            </div>
+        </aside>
+
+        <section class="center-column fb-feed-center">
+            <!-- Stories placeholder -->
+            <div class="stories-container">
+                <div class="story-card create-story">
+                    <div class="story-create-img"></div>
+                    <div class="story-create-btn"><i class="fa-solid fa-plus"></i></div>
+                    <span>Create Story</span>
+                </div>
+                <!-- Mock stories -->
+                <div class="story-card mock-story" style="background:#555;">
+                    <div class="story-avatar">B</div>
+                    <span>Bob Smith</span>
+                </div>
+                <div class="story-card mock-story" style="background:#777;">
+                    <div class="story-avatar">A</div>
+                    <span>Alice J.</span>
+                </div>
+            </div>
+
+            <section id="create-post" class="card composer-card fb-composer">
+                <div id="feed-alert"></div>
+                <div class="composer-top">
+                    <div id="composer-avatar" class="avatar small-avatar">N</div>
+                    <button class="composer-open-btn" id="open-composer-modal">What's on your mind, <span id="composer-first-name">User</span>?</button>
+                </div>
+                <div class="divider"></div>
+                <div class="composer-bottom">
+                    <button class="composer-action"><i class="fa-solid fa-video" style="color: #f3425f;"></i> Live video</button>
+                    <button class="composer-action"><i class="fa-regular fa-image" style="color: #45bd62;"></i> Photo/video</button>
+                    <button class="composer-action"><i class="fa-regular fa-smile" style="color: #f7b928;"></i> Feeling/activity</button>
+                </div>
+                
+                <!-- Hidden forms for actual submission instead of modal for simplicity right now -->
+                <form id="post-form" class="composer-form hidden-form" style="display: none;">
+                    <textarea id="post-content" placeholder="Write something..." rows="3"></textarea>
+                    <input id="post-image" type="url" placeholder="Photo URL">
+                    <input id="post-video" type="url" placeholder="Video URL">
+                    <input id="post-link" type="url" placeholder="Link URL">
+                    <button type="submit" class="btn primary">Post</button>
+                    <button type="button" class="btn secondary" id="close-composer-modal">Cancel</button>
+                </form>
+            </section>
+
+
+
+            <div id="feed-list" class="feed-list fb-posts"></div>
+        </section>
+
+        <aside class="sidebar-column fb-sidebar-right">
+            <div class="contacts-header">
+                <h3>Contacts</h3>
+                <div class="contacts-actions">
+                    <i class="fa-solid fa-video"></i>
+                    <i class="fa-solid fa-search"></i>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+            <div id="suggested-friends-list" class="contacts-list">
+                <!-- Suggested friends will load here -->
+            </div>
+        </aside>
+    </main>
+
+    <script src="../js/app.js"></script>
+    <script>
+        document.getElementById('open-composer-modal').addEventListener('click', () => {
+            document.getElementById('post-form').style.display = 'grid';
+            document.querySelector('.composer-bottom').style.display = 'none';
+            document.querySelector('.composer-open-btn').style.display = 'none';
+        });
+        document.getElementById('close-composer-modal').addEventListener('click', () => {
+            document.getElementById('post-form').style.display = 'none';
+            document.querySelector('.composer-bottom').style.display = 'flex';
+            document.querySelector('.composer-open-btn').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Nexus</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="register">
+    <header class="site-header">
+        <div class="container navbar">
+            <a class="brand" href="../index.html"><span>N</span>Nexus</a>
+            <div class="nav-actions">
+                <a class="secondary" href="login.html">Already signed up?</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container page-shell">
+        <section class="auth-panel">
+            <h2>Create your Nexus account</h2>
+            <p>Register fast and start building your social community.</p>
+            <div id="register-alert"></div>
+            <form id="register-form">
+                <div class="field">
+                    <label for="register-username">Username</label>
+                    <input id="register-username" type="text" placeholder="nexus_user" required>
+                </div>
+                <div class="field">
+                    <label for="register-fullname">Full name</label>
+                    <input id="register-fullname" type="text" placeholder="Ava Taylor" required>
+                </div>
+                <div class="field">
+                    <label for="register-email">Email</label>
+                    <input id="register-email" type="email" placeholder="hello@nexus.app" required>
+                </div>
+                <div class="field">
+                    <label for="register-password">Password</label>
+                    <input id="register-password" type="password" placeholder="Create a password" required>
+                </div>
+                <div class="field">
+                    <label for="register-bio">Bio</label>
+                    <textarea id="register-bio" placeholder="Tell people what makes your Nexus profile special..."></textarea>
+                </div>
+                <button type="submit" class="btn primary btn-block">Create Account</button>
+            </form>
+            <p style="margin-top: 1.25rem; color: var(--muted);">Already have an account? <a href="login.html">Log in</a>.</p>
+        </section>
+    </main>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>
